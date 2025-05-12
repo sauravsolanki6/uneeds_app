@@ -297,51 +297,45 @@ class WalletcredithistoryState extends State<Walletcredithistory> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Amount : ',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColor.bordercolor),
-                              ),
-                              Text(
-                                _isSearching
-                                    ? double.parse(_searchlist[index].amount!)
-                                        .inRupeesFormat()
-                                    : double.parse(
-                                            walletdebithistory[index].amount!)
-                                        .inRupeesFormat(),
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColor.bordercolor),
-                              ),
-                            ],
+                          Text(
+                            'Amount : ',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.bordercolor),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                'Transaction Number : ',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColor.bordercolor),
-                              ),
-                              Text(
-                                _isSearching
-                                    ? _searchlist[index].transactionNumber!
-                                    : walletdebithistory[index]
-                                        .transactionNumber!,
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColor.bordercolor),
-                              ),
-                            ],
+                          Text(
+                            _isSearching
+                                ? double.parse(_searchlist[index].amount!)
+                                    .inRupeesFormat()
+                                : double.parse(
+                                        walletdebithistory[index].amount!)
+                                    .inRupeesFormat(),
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.bordercolor),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Transaction Number : ',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.bordercolor),
+                          ),
+                          Text(
+                            _isSearching
+                                ? _searchlist[index].transactionNumber!
+                                : walletdebithistory[index].transactionNumber!,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: AppColor.bordercolor),
                           ),
                         ],
                       ),

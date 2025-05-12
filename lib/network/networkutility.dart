@@ -1,6 +1,6 @@
 class NetworkUtility {
   // static String base_api = "https://uneedsgold.com/ung_test/";
-  static String base_api = "https://uneedsgold.com/ung_quickensol_test/";
+  static String base_api = "https://uneedsgold.com/";
   static String sign_up_api = base_api + "api-create-account";
   static String unique_mobile_api = base_api + "api-get-unique-mobile";
   static String unique_email_api = base_api + "api-get-unique-email";
@@ -9,8 +9,7 @@ class NetworkUtility {
   static String resend_otp = base_api + "api_resend_otp";
   static String login_api = base_api + "api-login";
   static String forgot_password_api = base_api + "api-forgot-password";
-  static String change_password_api =
-      base_api + "api-update-password"; //This means change password
+  static String change_password_api = base_api + "api-update-password";
   static String get_live_rate_api = base_api + "api-live-rate";
   static String get_onward_profile_api = base_api + "api-my-profile";
   static String get_state_api = base_api + "api-get-state";

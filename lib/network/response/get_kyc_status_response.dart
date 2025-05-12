@@ -1,0 +1,211 @@
+// To parse this JSON data, do
+//
+//     final getkycstatusresponse = getkycstatusresponseFromJson(jsonString);
+
+import 'dart:convert';
+
+List<Getkycstatusresponse> getkycstatusresponseFromJson(String str) =>
+    List<Getkycstatusresponse>.from(
+        json.decode(str).map((x) => Getkycstatusresponse.fromJson(x)));
+
+String getkycstatusresponseToJson(List<Getkycstatusresponse> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class Getkycstatusresponse {
+  String? status;
+  String? message;
+  Data? data;
+
+  Getkycstatusresponse({
+    this.status,
+    this.message,
+    this.data,
+  });
+
+  factory Getkycstatusresponse.fromJson(Map<String, dynamic> json) =>
+      Getkycstatusresponse(
+        status: json["status"],
+        message: json["message"],
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "data": data?.toJson(),
+      };
+}
+
+class Data {
+  String? id;
+  String? name;
+  String? firstName;
+  String? lastName;
+  String? mobile;
+  String? email;
+  String? password;
+  String? address;
+  String? isType;
+  dynamic salt;
+  String? isApproved;
+  DateTime? lastLogin;
+  dynamic referralCode;
+  dynamic referralCustomerId;
+  String? kyc;
+  String? ownReferralCode;
+  String? membershipStatus;
+  String? country;
+  String? state;
+  String? district;
+  String? taluka;
+  String? pincode;
+  String? birthDate;
+  String? annivarsary;
+  dynamic image;
+  String? aadharNo;
+  String? panNo;
+  dynamic bankName;
+  dynamic branchName;
+  dynamic accountNumber;
+  dynamic accountType;
+  dynamic ifscCode;
+  dynamic micrNumber;
+  String? firstLogin;
+  String? isAutoDeduct;
+  DateTime? createdOn;
+  String? isDeleted;
+  String? status;
+  DateTime? updatedOn;
+
+  Data({
+    this.id,
+    this.name,
+    this.firstName,
+    this.lastName,
+    this.mobile,
+    this.email,
+    this.password,
+    this.address,
+    this.isType,
+    this.salt,
+    this.isApproved,
+    this.lastLogin,
+    this.referralCode,
+    this.referralCustomerId,
+    this.kyc,
+    this.ownReferralCode,
+    this.membershipStatus,
+    this.country,
+    this.state,
+    this.district,
+    this.taluka,
+    this.pincode,
+    this.birthDate,
+    this.annivarsary,
+    this.image,
+    this.aadharNo,
+    this.panNo,
+    this.bankName,
+    this.branchName,
+    this.accountNumber,
+    this.accountType,
+    this.ifscCode,
+    this.micrNumber,
+    this.firstLogin,
+    this.isAutoDeduct,
+    this.createdOn,
+    this.isDeleted,
+    this.status,
+    this.updatedOn,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        id: json["id"],
+        name: json["name"],
+        firstName: json["first_name"],
+        lastName: json["last_name"],
+        mobile: json["mobile"],
+        email: json["email"],
+        password: json["password"],
+        address: json["address"],
+        isType: json["is_type"],
+        salt: json["salt"],
+        isApproved: json["is_approved"],
+        lastLogin: json["last_login"] == null
+            ? null
+            : DateTime.parse(json["last_login"]),
+        referralCode: json["referral_code"],
+        referralCustomerId: json["referral_customer_id"],
+        kyc: json["kyc"],
+        ownReferralCode: json["own_referral_code"],
+        membershipStatus: json["membership_status"],
+        country: json["country"],
+        state: json["state"],
+        district: json["district"],
+        taluka: json["taluka"],
+        pincode: json["pincode"],
+        birthDate: json["birth_date"],
+        annivarsary: json["annivarsary"],
+        image: json["image"],
+        aadharNo: json["aadhar_no"],
+        panNo: json["pan_no"],
+        bankName: json["bank_name"],
+        branchName: json["branch_name"],
+        accountNumber: json["account_number"],
+        accountType: json["account_type"],
+        ifscCode: json["ifsc_code"],
+        micrNumber: json["micr_number"],
+        firstLogin: json["first_login"],
+        isAutoDeduct: json["is_auto_deduct"],
+        createdOn: json["created_on"] == null
+            ? null
+            : DateTime.parse(json["created_on"]),
+        isDeleted: json["is_deleted"],
+        status: json["status"],
+        updatedOn: json["updated_on"] == null
+            ? null
+            : DateTime.parse(json["updated_on"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "first_name": firstName,
+        "last_name": lastName,
+        "mobile": mobile,
+        "email": email,
+        "password": password,
+        "address": address,
+        "is_type": isType,
+        "salt": salt,
+        "is_approved": isApproved,
+        "last_login": lastLogin?.toIso8601String(),
+        "referral_code": referralCode,
+        "referral_customer_id": referralCustomerId,
+        "kyc": kyc,
+        "own_referral_code": ownReferralCode,
+        "membership_status": membershipStatus,
+        "country": country,
+        "state": state,
+        "district": district,
+        "taluka": taluka,
+        "pincode": pincode,
+        "birth_date": birthDate,
+        "annivarsary": annivarsary,
+        "image": image,
+        "aadhar_no": aadharNo,
+        "pan_no": panNo,
+        "bank_name": bankName,
+        "branch_name": branchName,
+        "account_number": accountNumber,
+        "account_type": accountType,
+        "ifsc_code": ifscCode,
+        "micr_number": micrNumber,
+        "first_login": firstLogin,
+        "is_auto_deduct": isAutoDeduct,
+        "created_on": createdOn?.toIso8601String(),
+        "is_deleted": isDeleted,
+        "status": status,
+        "updated_on": updatedOn?.toIso8601String(),
+      };
+}

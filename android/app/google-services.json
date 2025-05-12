@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "69404948056",
+    "project_id": "uneedsgold-b449e",
+    "storage_bucket": "uneedsgold-b449e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69404948056:android:f14086e9a38dcb551c3c2d",
+        "android_client_info": {
+          "package_name": "com.quick.ungolds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUPcJJKS5YOWzGJpyN8GP_57KUiKAW2bo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

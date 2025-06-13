@@ -293,6 +293,9 @@ class RepaymetSchedulepagestate extends State<RepaymetSchedulepage> {
   int showenachbutton = 0;
   Widget listview() {
     return ListView.builder(
+      shrinkWrap: true, // Ensures the ListView takes only the space it needs
+      physics:
+          const AlwaysScrollableScrollPhysics(), // Ensures consistent scrolling behavior
       itemCount: repaymentlist.length,
       itemBuilder: (context, index) {
         if (repaymentlist[index].paymentMethod == null &&
@@ -306,210 +309,256 @@ class RepaymetSchedulepagestate extends State<RepaymetSchedulepage> {
         return Padding(
           padding: const EdgeInsets.only(top: 2, bottom: 8),
           child: ListTile(
-              title: Container(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(15)),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          (index + 1).toString() + '.',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: AppColor.bordercolor,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Column(
+            title: Container(
+              padding:
+                  const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        // Wrap the first Row child in Expanded to constrain its width
+                        child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Payment Date: ",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: AppColor.bordercolor,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                    DateFormat('dd-MM-yyyy').format(
-                                        repaymentlist[index].paymentDate!),
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: AppColor.bordercolor,
-                                        fontWeight: FontWeight.w500))
-                              ],
+                            Text(
+                              (index + 1).toString() + '.',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColor.bordercolor,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Payment Amount:  ",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: AppColor.bordercolor,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                Text(
-                                    "${double.parse(repaymentlist[index].paymentAmount!).inRupeesFormat()}",
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: AppColor.bordercolor,
-                                        fontWeight: FontWeight.w500))
-                              ],
-                            )
+                            const SizedBox(width: 5),
+                            Expanded(
+                              // Wrap the Column in Expanded to constrain its width
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Payment Date: ",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: AppColor.bordercolor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Flexible(
+                                        // Wrap the Text in Flexible to prevent overflow
+                                        child: Text(
+                                          DateFormat('dd-MM-yyyy').format(
+                                            repaymentlist[index].paymentDate!,
+                                          ),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppColor.bordercolor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          overflow: TextOverflow
+                                              .ellipsis, // Handle long text gracefully
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Payment Amount:  ",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: AppColor.bordercolor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Flexible(
+                                        // Wrap the Text in Flexible to prevent overflow
+                                        child: Text(
+                                          "${double.parse(repaymentlist[index].paymentAmount!).inRupeesFormat()}",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: AppColor.bordercolor,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          overflow: TextOverflow
+                                              .ellipsis, // Handle long text gracefully
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        repaymentlist[index].paymentStatus == "0"
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  emicheck[index] == false
-                                      ? Container(
-                                          decoration: BoxDecoration(
+                      ),
+                      Row(
+                        children: [
+                          repaymentlist[index].paymentStatus == "0"
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    emicheck[index] == false
+                                        ? Container(
+                                            decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(3),
                                               border: Border.all(
-                                                  color: AppColor.redcolor)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child: Text('Pending',
-                                                  style: TextStyle(
-                                                      color: AppColor.redcolor,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12),
-                                                  textAlign: TextAlign.center),
+                                                  color: AppColor.redcolor),
                                             ),
-                                          ),
-                                        )
-                                      : Container(
-                                          decoration: BoxDecoration(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(3.0),
+                                              child: InkWell(
+                                                onTap: () {},
+                                                child: Text(
+                                                  'Pending',
+                                                  style: TextStyle(
+                                                    color: AppColor.redcolor,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 12,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(
+                                            decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(3),
                                               border: Border.all(
                                                 color: const Color(0xff9c27b0),
-                                              )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
-                                            child: InkWell(
-                                              onTap: () {
-                                                Networkcallforallamount(
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(3.0),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Networkcallforallamount(
                                                     double.parse(
                                                         repaymentlist[index]
                                                             .paymentAmount!),
-                                                    repaymentlist[index].id!);
-                                              },
-                                              child: const Text('Pay EMI',
+                                                    repaymentlist[index].id!,
+                                                  );
+                                                },
+                                                child: const Text(
+                                                  'Pay EMI',
                                                   style: TextStyle(
-                                                      color: Color(0xff9c27b0),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12),
-                                                  textAlign: TextAlign.center),
+                                                    color: Color(0xff9c27b0),
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 12,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  showenachbutton == 1 &&
-                                          repaymentlist[index].paymentMethod ==
-                                              null
-                                      ? Container(
-                                          decoration: BoxDecoration(
+                                    const SizedBox(height: 5),
+                                    showenachbutton == 1 &&
+                                            repaymentlist[index]
+                                                    .paymentMethod ==
+                                                null
+                                        ? Container(
+                                            decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(3),
                                               border: Border.all(
                                                 color: AppColor.buttoncolor,
-                                              )),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.push(context,
-                                                    MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return eNachsetuppage(
-                                                        widget.orderId,
-                                                        'repayment');
-                                                  },
-                                                )).then(
-                                                  (value) {
-                                                    Networkcallforrepaymentschedule();
-                                                  },
-                                                );
-                                              },
-                                              child: Text('eNach Setup',
-                                                  style: TextStyle(
-                                                      color:
-                                                          AppColor.buttoncolor,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 12),
-                                                  textAlign: TextAlign.center),
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      : Container()
-                                ],
-                              )
-                            : Container(
-                                decoration: BoxDecoration(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(3.0),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) {
+                                                        return eNachsetuppage(
+                                                          widget.orderId,
+                                                          'repayment',
+                                                        );
+                                                      },
+                                                    ),
+                                                  ).then(
+                                                    (value) {
+                                                      Networkcallforrepaymentschedule();
+                                                    },
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'eNach Setup',
+                                                  style: TextStyle(
+                                                    color: AppColor.buttoncolor,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 12,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : Container(),
+                                  ],
+                                )
+                              : Container(
+                                  decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(3),
                                     border: Border.all(
                                       color: AppColor.greencolor,
-                                    )),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: Text('Success',
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(3.0),
+                                    child: InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        'Success',
                                         style: TextStyle(
-                                            color: AppColor.greencolor,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 12),
-                                        textAlign: TextAlign.center),
+                                          color: AppColor.greencolor,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                        repaymentlist[index].paymentStatus == "1"
-                            ? IconButton(
-                                onPressed: () {
-                                  Networkcallforemireceipt(
-                                      repaymentlist[index].id!, index);
-                                },
-                                icon: const Icon(
-                                  CupertinoIcons.doc,
-                                  size: 20,
-                                  color: Color(0xff007bff),
-                                ))
-                            : SizedBox(
-                                height: 20,
-                                width: 50,
-                              )
-                      ],
-                    )
-                  ],
-                ),
-              ],
+                          repaymentlist[index].paymentStatus == "1"
+                              ? IconButton(
+                                  onPressed: () {
+                                    Networkcallforemireceipt(
+                                      repaymentlist[index].id!,
+                                      index,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    CupertinoIcons.doc,
+                                    size: 20,
+                                    color: Color(0xff007bff),
+                                  ),
+                                )
+                              : const SizedBox(
+                                  height: 20,
+                                  width: 50,
+                                ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         );
       },
     );
